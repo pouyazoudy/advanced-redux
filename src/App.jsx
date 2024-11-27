@@ -20,6 +20,17 @@ function App() {
     dispatch(fetchCartData());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
+    }
+  }, [cart, dispatch]);
+
+
   return (
     <>
       {notification && (
